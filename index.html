@@ -12,6 +12,7 @@
       :root { --ink:#1c1a17; --paper:#f7f2e9; --paper-deep:#efe5d5; --folder:#d3c09f; --green:#0b8271; --red:#9e4036; --line:rgba(28,26,23,.34); }
       * { box-sizing:border-box; }
       html { scroll-behavior:smooth; }
+      body { overflow-x:hidden; }
       body { margin:0; color:var(--ink); font-family:"Noto Sans SC", system-ui, sans-serif; background-color:var(--paper); background-image:repeating-linear-gradient(0deg,rgba(91,64,38,.028) 0 1px,transparent 1px 5px),repeating-linear-gradient(90deg,rgba(91,64,38,.018) 0 1px,transparent 1px 7px); }
       a { color:inherit; text-decoration:none; }
       .shell { width:min(1240px, calc(100% - 48px)); margin:auto; }
@@ -109,11 +110,20 @@
       .contact-links { display:grid; justify-items:start; gap:12px; }
       .experience-button { display:inline-block; margin-top:13px; padding:8px 11px; border:1px solid var(--ink); background:var(--ink); color:var(--paper) !important; font:700 10px "Space Mono",monospace; letter-spacing:.04em; text-decoration:none !important; }.experience-button:hover { background:var(--green); }
       .gallery-toggle { display:inline-block; margin-top:13px; padding:8px 11px; border:1px solid var(--green); background:transparent; color:var(--green); cursor:pointer; font:700 10px "Space Mono",monospace; letter-spacing:.04em; }.gallery-toggle:hover { background:var(--green); color:var(--paper); }
-      .work-gallery { display:flex; gap:12px; max-height:0; margin-top:0; overflow-x:auto; opacity:0; cursor:grab; transition:max-height .55s ease,margin-top .35s ease,opacity .3s ease; scroll-snap-type:x mandatory; user-select:none; }
-      .work-gallery.open { max-height:278px; margin-top:18px; opacity:1; }.work-gallery::-webkit-scrollbar { height:7px; }.work-gallery::-webkit-scrollbar-thumb { background:var(--green); }
-      .work-gallery img { flex:0 0 auto; width:auto; max-width:420px; height:245px; object-fit:contain; border:1px solid var(--ink); scroll-snap-align:start; background:var(--paper-deep); }
-      .work-gallery.dragging { cursor:grabbing; scroll-snap-type:none; }
-      @media (max-width:760px) { .shell { width:min(100% - 32px,1240px); }.nav-links { display:flex; }.nav-links a { display:none; }.hero { min-height:auto; grid-template-columns:1fr; gap:42px; padding:62px 0 68px; }.folder-wrap { min-height:330px; }.folder { width:88%; height:280px; }.folder h2 { font-size:43px; margin-top:48px; }.section { padding:65px 0; }.section-head { display:block; }.section-note { margin-top:18px; }.intro-grid, .about { grid-template-columns:1fr; gap:24px; }.experience { grid-template-columns:1fr; gap:8px; }.works { grid-template-columns:1fr; }.work { min-height:315px; }.project-modal { padding:13px; }.project-file { max-height:calc(100vh - 26px); padding:45px 22px 26px; }.project-file::after { right:60px; }.modal-meta { grid-template-columns:87px 1fr; }.contact { display:block; }.contact a { display:inline-block; margin-top:24px; } }
+      .experience > div, .work-gallery { min-width:0; }
+      .work-gallery { position:relative; width:100%; max-width:100%; max-height:0; margin-top:0; overflow:hidden; opacity:0; transition:max-height .55s ease,margin-top .35s ease,opacity .3s ease; user-select:none; contain:layout paint; }
+      .work-gallery.open { max-height:292px; margin-top:18px; opacity:1; }
+      .gallery-viewport { width:100%; overflow:hidden; cursor:grab; touch-action:pan-y; }
+      .gallery-viewport.dragging { cursor:grabbing; }
+      .gallery-track { display:flex; width:100%; min-width:0; gap:0; padding:0; align-items:center; will-change:transform; }
+      .gallery-slide { flex:0 0 auto; width:auto; max-width:none; height:260px; object-fit:contain; border:0; background:transparent; pointer-events:none; }
+      .gallery-control { position:absolute; z-index:2; top:50%; width:36px; height:46px; border:1px solid var(--ink); background:rgba(247,242,233,.92); color:var(--ink); cursor:pointer; transform:translateY(-50%); font:700 21px/1 "Space Mono",monospace; transition:background .2s,color .2s,transform .2s; }
+      .gallery-control:hover, .gallery-control:focus-visible { background:var(--ink); color:var(--paper); outline:2px solid var(--green); outline-offset:2px; }
+      .gallery-control:active { transform:translateY(-50%) scale(.94); }
+      .gallery-prev { left:7px; }.gallery-next { right:7px; }
+      .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+      @media (prefers-reduced-motion:reduce) { .gallery-track { transition-duration:.01ms !important; } }
+      @media (max-width:760px) { .shell { width:min(100% - 32px,1240px); }.nav-links { display:flex; }.nav-links a { display:none; }.hero { min-height:auto; grid-template-columns:1fr; gap:42px; padding:62px 0 68px; }.folder-wrap { min-height:330px; }.folder { width:88%; height:280px; }.folder h2 { font-size:43px; margin-top:48px; }.section { padding:65px 0; }.section-head { display:block; }.section-note { margin-top:18px; }.intro-grid, .about { grid-template-columns:1fr; gap:24px; }.experience { grid-template-columns:1fr; gap:8px; }.works { grid-template-columns:1fr; }.work { min-height:315px; }.project-modal { padding:13px; }.project-file { max-height:calc(100vh - 26px); padding:45px 22px 26px; }.project-file::after { right:60px; }.modal-meta { grid-template-columns:87px 1fr; }.contact { display:block; }.contact a { display:inline-block; margin-top:24px; }.work-gallery.open { max-height:252px; }.gallery-slide { height:220px; }.gallery-control { width:31px; height:41px; font-size:18px; }.gallery-prev { left:3px; }.gallery-next { right:3px; } }
     </style>
   </head>
   <body>
@@ -169,31 +179,126 @@
         const gallery = document.getElementById(button.dataset.galleryToggle);
         gallery.classList.toggle("open");
         const opened = gallery.classList.contains("open");
-        if (opened) gallery.dispatchEvent(new Event("scroll"));
+        if (opened) gallery.dispatchEvent(new Event("galleryopen"));
         const english = currentLanguage === "en";
         button.textContent = opened ? (english ? "Close gallery ↑" : "收起作品 ↑") : (english ? (button.dataset.galleryToggle === "poster-gallery" ? "View poster work ↓" : "View shop work ↓") : (button.dataset.galleryToggle === "poster-gallery" ? "展开海报作品 ↓" : "展开微店作品 ↓"));
       });
       const galleryState = new WeakMap();
       const activateGallery = gallery => {
         if (galleryState.has(gallery)) return;
-        const state = { lastInteraction: 0, dragging: false, startX: 0, startScroll: 0, autoScrolling: false };
+        const images = [...gallery.querySelectorAll(":scope > img")];
+        if (images.length < 2) return;
+        const isEnglish = document.documentElement.lang === "en";
+        const viewport = document.createElement("div");
+        const track = document.createElement("div");
+        const previous = document.createElement("button");
+        const next = document.createElement("button");
+        const status = document.createElement("span");
+        viewport.className = "gallery-viewport";
+        track.className = "gallery-track";
+        previous.className = "gallery-control gallery-prev";
+        next.className = "gallery-control gallery-next";
+        status.className = "sr-only";
+        previous.type = next.type = "button";
+        previous.innerHTML = "‹";
+        next.innerHTML = "›";
+        previous.setAttribute("aria-label", isEnglish ? "Show previous image" : "查看上一张图片");
+        next.setAttribute("aria-label", isEnglish ? "Show next image" : "查看下一张图片");
+        gallery.tabIndex = 0;
+        gallery.setAttribute("role", "region");
+        gallery.setAttribute("aria-roledescription", "carousel");
+        gallery.setAttribute("aria-label", isEnglish ? "Portfolio image carousel" : "作品图片轮播");
+        images.forEach((image, index) => {
+          image.className = "gallery-slide";
+          image.draggable = false;
+          image.setAttribute("role", "group");
+          image.setAttribute("aria-label", `${index + 1} / ${images.length}`);
+        });
+        const firstClone = images[0].cloneNode(true);
+        const lastClone = images[images.length - 1].cloneNode(true);
+        firstClone.setAttribute("aria-hidden", "true");
+        lastClone.setAttribute("aria-hidden", "true");
+        firstClone.alt = lastClone.alt = "";
+        track.append(lastClone, ...images, firstClone);
+        viewport.append(track);
+        gallery.replaceChildren(viewport, previous, next, status);
+        const state = { count:images.length, virtualIndex:1, dragging:false, hovering:false, focused:false, startX:0, dragX:0, transitioning:false, lastWheel:0 };
         galleryState.set(gallery, state);
-        const interact = () => { state.lastInteraction = Date.now(); };
-        gallery.addEventListener("pointerdown", event => { state.dragging = true; state.startX = event.clientX; state.startScroll = gallery.scrollLeft; gallery.classList.add("dragging"); gallery.setPointerCapture(event.pointerId); interact(); });
-        gallery.addEventListener("pointermove", event => { if (!state.dragging) return; gallery.scrollLeft = state.startScroll - (event.clientX - state.startX); interact(); });
-        const release = () => { state.dragging = false; gallery.classList.remove("dragging"); interact(); };
-        gallery.addEventListener("pointerup", release); gallery.addEventListener("pointercancel", release);
-        gallery.addEventListener("wheel", interact, { passive:true }); gallery.addEventListener("scroll", () => { if (!state.autoScrolling) interact(); }, { passive:true });
-        const autoScroll = () => {
-          if (gallery.classList.contains("open") && !state.dragging && Date.now() - state.lastInteraction > 1400 && gallery.scrollWidth > gallery.clientWidth) {
-            const atEnd = gallery.scrollLeft >= gallery.scrollWidth - gallery.clientWidth - 1;
-            state.autoScrolling = true;
-            gallery.scrollLeft = atEnd ? 0 : gallery.scrollLeft + 0.45;
-            requestAnimationFrame(() => { state.autoScrolling = false; });
-          }
-          requestAnimationFrame(autoScroll);
+        const positionFor = index => {
+          const slide = track.children[index];
+          return -(slide.offsetLeft - (viewport.clientWidth - slide.getBoundingClientRect().width) / 2);
         };
-        requestAnimationFrame(autoScroll);
+        const currentIndex = () => (state.virtualIndex - 1 + state.count) % state.count;
+        const updateStatus = () => { status.textContent = `${isEnglish ? "Image" : "图片"} ${currentIndex() + 1} / ${state.count}`; };
+        const render = (animate = true, offset = 0) => {
+          track.style.transition = animate ? "transform 900ms cubic-bezier(.22,.75,.24,1)" : "none";
+          track.style.transform = `translate3d(${positionFor(state.virtualIndex) + offset}px,0,0)`;
+        };
+        const move = direction => {
+          if (state.transitioning || state.dragging) return;
+          state.transitioning = true;
+          state.virtualIndex += direction;
+          render(true);
+          updateStatus();
+        };
+        track.addEventListener("transitionend", event => {
+          if (event.propertyName !== "transform") return;
+          if (state.virtualIndex === 0) state.virtualIndex = state.count;
+          if (state.virtualIndex === state.count + 1) state.virtualIndex = 1;
+          render(false);
+          updateStatus();
+          state.transitioning = false;
+        });
+        previous.addEventListener("click", () => move(-1));
+        next.addEventListener("click", () => move(1));
+        gallery.addEventListener("keydown", event => {
+          if (event.key === "ArrowLeft") { event.preventDefault(); move(-1); }
+          if (event.key === "ArrowRight") { event.preventDefault(); move(1); }
+        });
+        viewport.addEventListener("pointerdown", event => {
+          if (state.transitioning) return;
+          state.dragging = true;
+          state.startX = event.clientX;
+          state.dragX = 0;
+          viewport.classList.add("dragging");
+          viewport.setPointerCapture(event.pointerId);
+          track.style.transition = "none";
+        });
+        viewport.addEventListener("pointermove", event => {
+          if (!state.dragging) return;
+          state.dragX = event.clientX - state.startX;
+          render(false, state.dragX);
+        });
+        const release = event => {
+          if (!state.dragging) return;
+          if (event?.pointerId !== undefined && viewport.hasPointerCapture(event.pointerId)) viewport.releasePointerCapture(event.pointerId);
+          state.dragging = false;
+          viewport.classList.remove("dragging");
+          const threshold = Math.min(90, viewport.clientWidth * .18);
+          if (Math.abs(state.dragX) > threshold) move(state.dragX < 0 ? 1 : -1);
+          else render(true);
+          state.dragX = 0;
+        };
+        viewport.addEventListener("pointerup", release);
+        viewport.addEventListener("pointercancel", release);
+        viewport.addEventListener("wheel", event => {
+          if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
+          event.preventDefault();
+          const now = Date.now();
+          if (now - state.lastWheel < 550) return;
+          state.lastWheel = now;
+          move(event.deltaX > 0 ? 1 : -1);
+        }, { passive:false });
+        gallery.addEventListener("mouseenter", () => { state.hovering = true; });
+        gallery.addEventListener("mouseleave", () => { state.hovering = false; });
+        gallery.addEventListener("focusin", () => { state.focused = true; });
+        gallery.addEventListener("focusout", event => { if (!gallery.contains(event.relatedTarget)) state.focused = false; });
+        gallery.addEventListener("galleryopen", () => requestAnimationFrame(() => render(false)));
+        window.addEventListener("resize", () => requestAnimationFrame(() => render(false)), { passive:true });
+        window.setInterval(() => {
+          if (gallery.classList.contains("open") && !state.hovering && !state.focused && !state.dragging && !state.transitioning && document.visibilityState === "visible") move(1);
+        }, 4200);
+        requestAnimationFrame(() => { render(false); updateStatus(); });
       };
       document.querySelectorAll(".work-gallery").forEach(activateGallery);
 
