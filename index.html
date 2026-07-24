@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="个人作品集｜内容运营与创意内容制作" />
+    <title>孟扬 Yang Meng｜PORTFOLIO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+SC:wght@400;500;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+      :root { --ink:#1c1a17; --paper:#f7f2e9; --paper-deep:#efe5d5; --folder:#d3c09f; --green:#0b8271; --red:#9e4036; --line:rgba(28,26,23,.34); }
+      * { box-sizing:border-box; }
+      html { scroll-behavior:smooth; }
+      body { margin:0; color:var(--ink); font-family:"Noto Sans SC", system-ui, sans-serif; background-color:var(--paper); background-image:repeating-linear-gradient(0deg,rgba(91,64,38,.028) 0 1px,transparent 1px 5px),repeating-linear-gradient(90deg,rgba(91,64,38,.018) 0 1px,transparent 1px 7px); }
+      a { color:inherit; text-decoration:none; }
+      .shell { width:min(1240px, calc(100% - 48px)); margin:auto; }
+      .nav { height:76px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); font:700 11px/1 "Space Mono", monospace; letter-spacing:.07em; }
+      .brand { font:700 13px/1 "Noto Sans SC", sans-serif; letter-spacing:.08em; }
+      .brand span { color:var(--green); }
+      .nav-links { display:flex; gap:24px; }
+      .nav-links a:hover { color:var(--green); }
+      .lang-toggle { padding:6px 8px; border:1px solid var(--ink); background:transparent; color:var(--ink); cursor:pointer; font:700 10px/1 "Space Mono",monospace; letter-spacing:.06em; }.lang-toggle:hover { background:var(--ink); color:var(--paper); }
+      .hero { min-height:650px; padding:82px 0 58px; display:grid; grid-template-columns:1.1fr .9fr; gap:64px; align-items:center; }
+      .eyebrow, .mono { font:700 11px/1.3 "Space Mono",monospace; letter-spacing:.08em; }
+      .eyebrow { display:flex; align-items:center; gap:10px; margin-bottom:24px; }
+      .eyebrow::before { content:""; width:26px; height:8px; border:1.5px solid var(--ink); border-radius:50%; }
+      h1 { margin:0; max-width:700px; font-size:clamp(52px,7.1vw,98px); font-weight:900; line-height:1.02; letter-spacing:-.07em; }
+      h1 em { color:var(--green); font-family:"DM Serif Display",serif; font-weight:400; letter-spacing:-.05em; }
+      .hero-copy { margin:29px 0 31px; max-width:475px; font-size:16px; line-height:1.9; }
+      .buttons { display:flex; gap:12px; flex-wrap:wrap; }
+      .button { padding:13px 19px; border:1px solid var(--ink); font-size:13px; font-weight:700; transition:.2s; }
+      .button.primary { background:var(--ink); color:var(--paper); }
+      .button:hover { transform:translate(-2px,-2px); box-shadow:3px 3px 0 var(--green); }
+      .folder-wrap { position:relative; min-height:390px; display:grid; place-items:center; }
+      .folder { position:relative; width:min(100%,440px); height:314px; padding:34px 32px; background:var(--folder); border:1.5px solid var(--ink); box-shadow:9px 10px 0 rgba(28,26,23,.15); transform:rotate(2.5deg); }
+      .folder::before { content:""; position:absolute; width:167px; height:42px; left:-1.5px; top:-42px; background:var(--folder); border:1.5px solid var(--ink); border-bottom:0; border-radius:3px 7px 0 0; }
+      .folder::after { content:""; position:absolute; right:24px; top:-21px; width:43px; height:43px; border-radius:50%; border:1.5px solid var(--ink); background:var(--paper); box-shadow:inset 0 0 0 8px var(--folder); }
+      .folder-top { position:relative; z-index:1; display:flex; justify-content:space-between; align-items:start; }
+      .folder-label { background:var(--paper); border:1px solid var(--ink); padding:6px 8px; font:700 10px/1 "Space Mono",monospace; transform:rotate(-2deg); }
+      .folder h2 { margin:56px 0 14px; font-size:51px; font-weight:900; line-height:.87; letter-spacing:-.08em; }
+      .folder h2 i { font-family:"DM Serif Display",serif; font-weight:400; }
+      .folder-footer { padding-top:13px; border-top:1px solid var(--line); display:flex; justify-content:space-between; font:10px "Space Mono",monospace; }
+      .star { position:absolute; bottom:-25px; left:-34px; font-size:74px; color:var(--red); transform:rotate(-19deg); }
+      .tape { position:absolute; right:11px; bottom:-12px; width:94px; height:29px; background:rgba(247,242,233,.7); border:1px solid rgba(28,26,23,.15); transform:rotate(-17deg); }
+      .section { padding:100px 0; border-top:1px solid var(--line); }
+      .section-head { display:flex; justify-content:space-between; gap:24px; align-items:flex-end; margin-bottom:42px; }
+      .section-title { margin:0; font-size:clamp(37px,5vw,64px); letter-spacing:-.07em; line-height:1; }
+      .section-title em { font-family:"DM Serif Display",serif; color:var(--green); font-weight:400; }
+      .section-note { max-width:290px; font-size:13px; line-height:1.75; }
+      .ability-grid { display:grid; grid-template-columns:repeat(5,1fr); border-top:1px solid var(--ink); border-left:1px solid var(--ink); }
+      .ability { min-height:195px; padding:18px; border-right:1px solid var(--ink); border-bottom:1px solid var(--ink); display:flex; flex-direction:column; justify-content:space-between; }
+      .ability b { font-size:17px; line-height:1.35; }
+      .ability span { color:var(--green); font-size:28px; font-family:"DM Serif Display",serif; }
+      .works { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+      .work { appearance:none; width:100%; text-align:left; color:inherit; font:inherit; cursor:pointer; position:relative; min-height:352px; padding:27px; display:flex; flex-direction:column; justify-content:space-between; overflow:hidden; border:1.5px solid var(--ink); background:var(--paper-deep); }
+      .work:nth-child(2), .work:nth-child(3) { background:#e5edf0; }
+      .work:nth-child(4) { background:#eee1da; }
+      .work:hover { box-shadow:7px 7px 0 var(--ink); transform:translate(-3px,-3px); }
+      .work, .work * { transition:.22s ease; }
+      .work:hover .work-no { color:var(--green); }
+      .work-no { font:700 12px "Space Mono",monospace; }
+      .clip { position:absolute; top:20px; right:28px; width:18px; height:42px; border:2px solid var(--ink); border-radius:10px; transform:rotate(35deg); }
+      .clip::after { content:""; position:absolute; width:8px; height:27px; left:3px; top:5px; border:1.5px solid var(--ink); border-radius:6px; }
+      .work h3 { margin:0 0 12px; font-size:clamp(28px,3.7vw,48px); line-height:1.08; letter-spacing:-.06em; max-width:86%; }
+      .work p { max-width:420px; margin:0; font-size:13px; line-height:1.8; }
+      .tag-row { display:flex; gap:7px; flex-wrap:wrap; }
+      .tag { padding:5px 8px; background:rgba(255,253,248,.58); border:1px solid var(--line); font:10px "Space Mono",monospace; }
+      .open-label { margin-top:13px; color:var(--green); font:700 10px "Space Mono",monospace; letter-spacing:.06em; }
+      .project-modal { position:fixed; inset:0; z-index:20; display:grid; place-items:center; padding:24px; background:rgba(28,26,23,.56); opacity:0; visibility:hidden; transition:opacity .25s,visibility .25s; }
+      .project-modal.show { opacity:1; visibility:visible; }
+      .project-modal[aria-hidden="false"] .project-file { animation:openFile .75s cubic-bezier(.2,.85,.24,1) both; }
+      .project-file { position:relative; width:min(850px,100%); max-height:min(780px,calc(100vh - 48px)); overflow:auto; padding:49px 48px 40px; background:var(--paper); border:1.5px solid var(--ink); box-shadow:11px 12px 0 rgba(0,0,0,.28); transform-origin:center bottom; }
+      .project-file::before { content:""; position:absolute; top:-25px; left:-1.5px; width:178px; height:25px; background:var(--folder); border:1.5px solid var(--ink); border-bottom:0; border-radius:5px 5px 0 0; }
+      .project-file::after { content:"PROJECT FILE / OPEN"; position:absolute; top:17px; right:51px; color:var(--green); font:700 10px "Space Mono",monospace; }
+      .modal-close { position:absolute; z-index:2; right:15px; top:14px; width:32px; height:32px; cursor:pointer; border:1px solid var(--ink); background:var(--paper); font:22px/1 Arial; }
+      .modal-head { padding-bottom:25px; border-bottom:1.5px solid var(--ink); }
+      .modal-number { display:block; margin-bottom:13px; color:var(--green); font:700 11px "Space Mono",monospace; }
+      .modal-head h2 { max-width:640px; margin:0; font-size:clamp(35px,5vw,62px); line-height:1.02; letter-spacing:-.07em; }
+      .modal-meta { display:grid; grid-template-columns:115px 1fr; gap:0 18px; margin:26px 0; border-top:1px solid var(--line); }
+      .modal-meta div { display:contents; }.modal-meta dt,.modal-meta dd { padding:11px 0; margin:0; border-bottom:1px solid var(--line); }.modal-meta dt { color:var(--green); font:700 10px "Space Mono",monospace; }.modal-meta dd { font-size:14px; line-height:1.6; }
+      .modal-body { font-size:14px; line-height:1.85; }.modal-body h3 { margin:23px 0 8px; font-size:16px; }.modal-body p { margin:0; }.modal-result { margin-top:8px; padding:15px; background:#e3eee9; border:1px solid rgba(11,130,113,.35); font-weight:700; }
+      .modal-action { display:inline-block; margin-top:26px; padding:12px 15px; background:var(--ink); color:var(--paper); font-size:13px; font-weight:700; }.modal-action:hover { background:var(--green); }
+      @keyframes openFile { 0% { opacity:0; transform:perspective(900px) rotateX(-74deg) translateY(42px) scale(.9); } 56% { opacity:1; transform:perspective(900px) rotateX(8deg) translateY(-8px) scale(1.015); } 100% { transform:perspective(900px) rotateX(0) translateY(0) scale(1); } }
+      .process { display:grid; grid-template-columns:repeat(5,1fr); gap:0; }
+      .step { padding:18px 17px 0 0; min-height:176px; position:relative; }
+      .step:not(:last-child)::after { content:"→"; position:absolute; right:5px; top:12px; color:var(--green); font:28px "DM Serif Display",serif; }
+      .step i { display:block; margin-bottom:34px; font:400 39px/1 "DM Serif Display",serif; color:var(--green); }
+      .step b { font-size:17px; }.step p { margin:8px 0; max-width:145px; font-size:12px; line-height:1.75; }
+      .about { display:grid; grid-template-columns:1fr 1fr; gap:42px; }
+      .about-copy { font-size:clamp(23px,2.4vw,33px); line-height:1.55; letter-spacing:-.04em; }
+      .file-list { border-top:1px solid var(--ink); }
+      .file-row { display:grid; grid-template-columns:90px 1fr; gap:17px; padding:16px 0; border-bottom:1px solid var(--line); font-size:13px; line-height:1.7; }
+      .intro-grid { display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:start; }
+      .intro-lead { margin:0; font-size:clamp(25px,3vw,40px); line-height:1.48; letter-spacing:-.05em; }
+      .intro-lead strong { color:var(--green); font-weight:800; }
+      .intro-notes { margin-top:25px; display:flex; gap:9px; flex-wrap:wrap; }
+      .experience-list { border-top:1.5px solid var(--ink); }
+      .experience { display:grid; grid-template-columns:125px 1fr; gap:21px; padding:25px 0; border-bottom:1px solid var(--line); }
+      .experience time { color:var(--green); font:700 11px/1.5 "Space Mono",monospace; }
+      .experience h3 { margin:0; font-size:21px; letter-spacing:-.035em; }
+      .experience .role { margin:5px 0 11px; font-size:13px; font-weight:700; }
+      .experience p { margin:0; max-width:760px; font-size:13px; line-height:1.8; }
+      .experience a { color:var(--green); font-weight:700; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:3px; }
+      .footer { padding:43px 0 50px; background:var(--ink); color:var(--paper); }
+      .contact { display:flex; align-items:end; justify-content:space-between; gap:22px; }
+      .contact h2 { margin:0; font-size:clamp(34px,5vw,65px); letter-spacing:-.07em; line-height:1.05; }.contact h2 em { font-family:"DM Serif Display",serif; font-weight:400; color:#8fd3c7; }
+      .contact a { padding-bottom:4px; border-bottom:1px solid #8fd3c7; font:13px "Space Mono",monospace; }
+      .contact-links { display:grid; justify-items:start; gap:12px; }
+      .experience-button { display:inline-block; margin-top:13px; padding:8px 11px; border:1px solid var(--ink); background:var(--ink); color:var(--paper) !important; font:700 10px "Space Mono",monospace; letter-spacing:.04em; text-decoration:none !important; }.experience-button:hover { background:var(--green); }
+      .gallery-toggle { display:inline-block; margin-top:13px; padding:8px 11px; border:1px solid var(--green); background:transparent; color:var(--green); cursor:pointer; font:700 10px "Space Mono",monospace; letter-spacing:.04em; }.gallery-toggle:hover { background:var(--green); color:var(--paper); }
+      .work-gallery { display:flex; gap:12px; max-height:0; margin-top:0; overflow-x:auto; opacity:0; cursor:grab; transition:max-height .55s ease,margin-top .35s ease,opacity .3s ease; scroll-snap-type:x mandatory; user-select:none; }
+      .work-gallery.open { max-height:278px; margin-top:18px; opacity:1; }.work-gallery::-webkit-scrollbar { height:7px; }.work-gallery::-webkit-scrollbar-thumb { background:var(--green); }
+      .work-gallery img { flex:0 0 176px; height:245px; object-fit:cover; border:1px solid var(--ink); scroll-snap-align:start; background:var(--paper-deep); }
+      .work-gallery.dragging { cursor:grabbing; scroll-snap-type:none; }
+      @media (max-width:760px) { .shell { width:min(100% - 32px,1240px); }.nav-links { display:flex; }.nav-links a { display:none; }.hero { min-height:auto; grid-template-columns:1fr; gap:42px; padding:62px 0 68px; }.folder-wrap { min-height:330px; }.folder { width:88%; height:280px; }.folder h2 { font-size:43px; margin-top:48px; }.section { padding:65px 0; }.section-head { display:block; }.section-note { margin-top:18px; }.intro-grid, .about { grid-template-columns:1fr; gap:24px; }.experience { grid-template-columns:1fr; gap:8px; }.works { grid-template-columns:1fr; }.work { min-height:315px; }.project-modal { padding:13px; }.project-file { max-height:calc(100vh - 26px); padding:45px 22px 26px; }.project-file::after { right:60px; }.modal-meta { grid-template-columns:87px 1fr; }.contact { display:block; }.contact a { display:inline-block; margin-top:24px; } }
+    </style>
+  </head>
+  <body>
+    <header class="shell nav"><a class="brand" href="#top">孟扬 <span>●</span> PORTFOLIO</a><nav class="nav-links"><a href="#about">ABOUT</a><a href="#works">WORKS</a><a href="#experience">EXPERIENCE</a><a href="#contact">CONTACT</a><button id="lang-toggle" class="lang-toggle" type="button">EN</button></nav></header>
+    <main id="top">
+      <section class="shell hero">
+        <div><div class="eyebrow">YANG MENG / CONTENT OPERATION &amp; CREATIVE MAKING</div><h1>把内容做成<br>有温度的 <em>现场。</em></h1><p class="hero-copy">你好，我是<strong>孟扬 Yang Meng</strong>。我做内容运营，也做内容本身——从选题、拍摄到剪辑和发布，让值得被看见的故事抵达更多人。</p><div class="buttons"><a class="button primary" href="#works">查看作品集 ↓</a><a class="button" href="mailto:meishamengyang@163.com">联系我</a></div></div>
+        <div class="folder-wrap"><span class="star">✦</span><span class="tape"></span><div class="folder"><div class="folder-top"><span class="folder-label">PERSONAL ARCHIVE</span><span class="mono">NO. 2026</span></div><h2>CONTENT<br><i>PORTFOLIO</i></h2><div class="folder-footer"><span>CREATIVE / SOCIAL / VIDEO</span><span>01 — 04</span></div></div></div>
+      </section>
+      <section id="about" class="shell section"><div class="section-head"><h2 class="section-title">关于 <em>me</em></h2><p class="section-note">华盛顿大学传播学本科生，GPA 3.90 / 4.00。</p></div><div class="intro-grid"><div><p class="intro-lead">我是一名关注<strong>品牌传播、内容运营与现场叙事</strong>的内容创作者。拥有中英文内容协作经验，能在活动、体育赛事与商业体等不同场景中，把项目目标转成清晰、有传播力的内容。</p><div class="intro-notes"><span class="tag">CONTENT OPERATION</span><span class="tag">CREATIVE PLANNING</span><span class="tag">VIDEO MAKING</span><span class="tag">SOCIAL MEDIA</span></div></div><div class="file-list"><div class="file-row"><span class="mono">EDU</span><span>University of Washington<br>传播学本科｜2024.09 — 至今｜GPA 3.90 / 4.00</span></div><div class="file-row"><span class="mono">HONOR</span><span>Dean’s List（院长荣誉名单）<br>授予学期表现位列前 5% 的学生，是对卓越学术成绩的校级认可。</span></div><div class="file-row"><span class="mono">TOOLS</span><span>Adobe Illustrator · Photoshop · Canva · CapCut · iMovie · SketchUp</span></div><div class="file-row"><span class="mono">AI / VIBE</span><span>熟练使用 AI 辅助内容、设计与网站工作：ChatGPT · Claude · Gemini · Cursor · GitHub Copilot · VS Code · Replit · v0 · Lovable · Bolt · GitHub · Figma · Vercel · HTML / CSS / JavaScript</span></div><div class="file-row"><span class="mono">WEB</span><span>WIX · Xiumi（秀米）· Microsoft 365</span></div><div class="file-row"><span class="mono">LANG</span><span>中文 / English</span></div></div></div></section>
+      <section id="works" class="shell section"><div class="section-head"><h2 class="section-title">精选 <em>highlights</em></h2><p class="section-note">点击档案袋，查看角色、工作内容、项目时间与成果。</p></div><div class="works">
+        <button class="work" type="button" data-project="cenuw"><span class="work-no">01 / WEB</span><span class="clip"></span><div><h3>华盛顿大学商社<br>官方网站</h3><p>独立搭建并维护 CENUW 网站，让活动、成员与内容有清晰的线上归档。</p><span class="open-label">OPEN THE FILE ↗</span></div><div class="tag-row"><span class="tag">INDEPENDENT</span><span class="tag">WEB BUILD</span></div></button>
+        <button class="work" type="button" data-project="sailgp"><span class="work-no">02 / GLOBAL SOCIAL</span><span class="clip"></span><div><h3>SailGP<br>赛事内容</h3><p>在国际帆船赛事现场参与运营、后勤与短视频内容制作。</p><span class="open-label">OPEN THE FILE ↗</span></div><div class="tag-row"><span class="tag">SAILGP NZL</span><span class="tag">INSTAGRAM</span></div></button>
+      </div></section>
+      <section id="experience" class="shell section"><div class="section-head"><h2 class="section-title">过往 <em>experience</em></h2><p class="section-note">在内容、赛事与大型活动的现场，持续积累执行、协调与传播经验。</p></div><div class="experience-list">
+        <article class="experience"><time>2025.06 — 2026.05</time><div><h3><a href="https://www.rise2gether.co/" target="_blank" rel="noopener">Rise2gether ↗</a></h3><p class="role">活动内容与协调实习生｜亚裔女性职业发展非营利组织</p><p>参与 15 场职业发展活动的策划与执行，单场规模最高 300 人；撰写活动提案、宣传文案及回顾内容，并协调 50+ 位行业嘉宾与合作伙伴。</p></div></article>
+        <article class="experience"><time>2024.09 — 至今</time><div><h3><a href="https://climatepledgearena.com/" target="_blank" rel="noopener">Climate Pledge Arena ↗</a></h3><p class="role">场馆运营实习生</p><p>参与 60+ 场职业体育赛事、演唱会及大型活动运营，为单场 15,000—18,000 名观众提供现场服务支持；管理 50+ 个 SKU 的库存、备货与设备维护。</p></div></article>
+        <article class="experience"><time>2025.03 — 2025.04</time><div><h3><a href="https://www.instagram.com/sailgpnzl/?hl=en" target="_blank" rel="noopener">SailGP（国际帆船大奖赛）· Black Foils（新西兰队）↗</a></h3><p class="role">赛事运营实习生｜全球顶级职业帆船联赛参赛队伍运营支持</p><p>SailGP 是汇聚多国国家队、使用高科技 F50 水翼双体船的年度全球职业帆船联赛，代表赛事现场的国际化、专业化协作标准。参与赛前筹备、后勤协调、赛船组装与团队物资供应；制作短视频内容，单条获得 28,000 播放量。</p></div></article>
+        <article class="experience"><time>2022.06 — 2022.07</time><div><h3>万科 · 深圳壹海城</h3><p class="role">商业管理实习生｜<a href="https://mp.weixin.qq.com/s/TvAonBSBjQZ6oy7WFLLw4w" target="_blank" rel="noopener">查看公众号推文 ↗</a></p><p>参与“微醺海岸”快闪活动策划及现场运营，累计覆盖 10,000+ 人次；负责活动宣传内容策划与公众号推文编辑，累计获得 10,000+ 阅读量与 300+ 点赞。</p></div></article>
+        <article class="experience"><time>CONTENT PROJECT</time><div><h3>微信视频号内容运营</h3><p class="role">万航帆艇营地说 · 陶校在梅沙 · 梅沙荣誉项目</p><p>参与账号选题、拍摄、剪辑、封面与发布等全流程内容工作；代表作品：<a href="https://weixin.qq.com/sph/A30PKySzqt" target="_blank" rel="noopener">视频一 ↗</a>。</p></div></article>
+        <article class="experience"><time>2025.06 — 2026.06</time><div><h3>Chinese Entrepreneurs Network at UW · CENUW</h3><p class="role">设计部部长｜品牌传播与内容运营</p><p>统筹 8 场大型活动的主视觉与宣传物料，覆盖 500+ 华大学生及 100+ 北美专业人士；搭建并运营社团独立网站一年以上。</p><a class="experience-button" href="https://cenuw.com" target="_blank" rel="noopener">查看网站 ↗</a></div></article>
+        <article class="experience"><time>ONGOING</time><div><h3>谁懂单眼皮啊</h3><p class="role">原创海报设计账号｜独立运营</p><p>持续发布原创海报设计与创作过程内容，目前仍在运营；累计获得 5,000+ 点赞与收藏，沉淀稳定受众与粉丝群体。</p><button class="gallery-toggle" type="button" data-gallery-toggle="poster-gallery">展开海报作品 ↓</button><div id="poster-gallery" class="work-gallery"><img src="assets/posters/yan-01.jpg" alt="原创海报设计作品 1" /><img src="assets/posters/silence-01.jpg" alt="原创海报设计作品 2" /><img src="assets/posters/yan-14.jpg" alt="原创海报设计作品 3" /></div></div></article>
+        <article class="experience"><time>PAST PROJECT</time><div><h3>一只羊羊羊</h3><p class="role">原创文创微店｜产品设计与私域运营</p><p>独立设计、推广并销售原创文创产品，负责产品、内容推广、客户沟通与订单管理；持续运营两年，累计 11,000 店铺关注者及 28,000 社交媒体粉丝。</p><button class="gallery-toggle" type="button" data-gallery-toggle="shop-gallery">展开微店作品 ↓</button><div id="shop-gallery" class="work-gallery"><img src="assets/shop/justin-ticket.jpg" alt="原创文创商品展示 1" /><img src="assets/shop/product-01.jpg" alt="原创文创商品展示 2" /><img src="assets/shop/store-01.jpg" alt="微店作品展示 3" /></div></div></article>
+      </div></section>
+    </main>
+    <div id="project-modal" class="project-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="project-file"><button class="modal-close" type="button" aria-label="关闭项目档案">×</button><div id="modal-content"></div></div>
+    </div>
+    <footer id="contact" class="footer"><div class="shell contact"><div><div class="mono">LET’S MAKE SOMETHING SEEN.</div><h2>想一起做点<br><em>有意思的内容？</em></h2></div><div class="contact-links"><a href="mailto:meishamengyang@163.com">meishamengyang@163.com ↗</a><a href="tel:+12066888209">+1 206 688 8209</a><a href="tel:+8615915316811">+86 159 1531 6811</a><a href="https://www.linkedin.com/in/yang-alice-meng-457189335/" target="_blank" rel="noopener">LinkedIn ↗</a></div></div></footer>
+    <script>
+      const projects = {
+        cenuw: { no:"01 / WEB", title:"大学社团官方网站", time:"2025.06 — 2026.06", role:"CENUW 设计部部长｜品牌传播与内容运营", work:"独立搭建并持续运营社团官方网站，负责网站的信息架构、内容规划、编辑发布与更新维护；让活动信息、成员故事与社团资源有统一、清晰的线上入口。", result:"网站持续运营一年以上；同时支持 8 场大型活动的视觉与传播物料，覆盖 500+ 华大学生及 100+ 北美专业人士。", link:"https://cenuw.com", label:"访问网站" },
+        channels: { no:"02 / VIDEO", title:"微信视频号内容运营", time:"项目周期：待补充", role:"内容运营｜万航帆艇营地说、陶校在梅沙、梅沙荣誉项目", work:"参与三个微信视频号的全流程内容工作：选题与脚本构思、现场拍摄、剪辑包装、封面与发布。针对帆船运动、校园生活与成长项目等不同主题，完成平台化表达。", result:"账号中多个视频获得较高点赞；可通过下方链接查看三个账号及代表作品。", links:[{label:"陶校在梅沙",url:"https://weixin.qq.com/sph/AVBIjMFq2E"},{label:"万航帆艇营地说",url:"https://weixin.qq.com/sph/AeEGKBB5jw"},{label:"梅沙荣誉项目",url:"https://weixin.qq.com/sph/A6Le1heKZJ"}] },
+        sailgp: { no:"03 / GLOBAL SOCIAL", title:"SailGP 赛事内容", time:"2025.03 — 2025.04", role:"Black Foils 新西兰队赛事运营实习生", work:"参与赛前筹备、后勤与船队协调，支持赛船组装、海情数据及岸上/水上团队物资供应；并参与赛事现场短视频内容制作及 SailGP 新西兰站官方 Instagram 内容运营。", result:"制作短视频单条获得 28,000 播放量；在国际体育赛事现场积累赛事运营与全球社媒内容协作经验。", link:"https://www.instagram.com/reel/DHnTRZ2x7zW/", label:"查看 Instagram Reel" },
+        xiaohongshu: { no:"04 / ONGOING", title:"谁懂单眼皮啊", time:"持续运营中", role:"小红书原创海报设计账号｜独立内容创作者", work:"独立运营小红书账号，持续发布原创海报设计及创作过程内容；负责选题、视觉设计、内容发布与账号日常维护，将个人设计表达沉淀为持续更新的内容系列。", result:"累计获得 5,000+ 点赞与收藏，并建立稳定受众与粉丝群体。", link:"https://xhslink.cn/m/7X5AZpXVkMD", label:"查看我的账号主页" }
+      };
+      const modal = document.getElementById("project-modal");
+      const modalContent = document.getElementById("modal-content");
+      const closeModal = () => { modal.classList.remove("show"); modal.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; };
+      document.querySelectorAll("[data-project]").forEach(card => card.addEventListener("click", () => {
+        const p = (currentLanguage === "en" ? englishProjects : projects)[card.dataset.project];
+        const projectLinks = p.links ? p.links.map(item => `<a class="modal-action" href="${item.url}" target="_blank" rel="noopener">${item.label} ↗</a>`).join(" ") : (p.link ? `<a class="modal-action" href="${p.link}" target="_blank" rel="noopener">${p.label} ↗</a>` : "");
+        const modalLabels = currentLanguage === "en" ? { time:"TIMING", role:"ROLE", work:"WHAT I DID", result:"OUTCOME" } : { time:"时间", role:"职位", work:"我做了什么", result:"获得什么成果" };
+        modalContent.innerHTML = `<div class="modal-head"><span class="modal-number">${p.no}</span><h2 id="modal-title">${p.title}</h2></div><dl class="modal-meta"><div><dt>${modalLabels.time}</dt><dd>${p.time}</dd></div><div><dt>${modalLabels.role}</dt><dd>${p.role}</dd></div></dl><div class="modal-body"><h3>${modalLabels.work}</h3><p>${p.work}</p><h3>${modalLabels.result}</h3><p class="modal-result">${p.result}</p>${projectLinks}</div>`;
+        modal.setAttribute("aria-hidden", "false"); modal.classList.add("show"); document.body.style.overflow = "hidden";
+      }));
+      document.querySelector(".modal-close").addEventListener("click", closeModal);
+      modal.addEventListener("click", event => { if (event.target === modal) closeModal(); });
+      document.addEventListener("keydown", event => { if (event.key === "Escape") closeModal(); });
+      document.addEventListener("click", event => {
+        const button = event.target.closest("[data-gallery-toggle]");
+        if (!button) return;
+        const gallery = document.getElementById(button.dataset.galleryToggle);
+        gallery.classList.toggle("open");
+        const opened = gallery.classList.contains("open");
+        if (opened) gallery.dispatchEvent(new Event("scroll"));
+        const english = currentLanguage === "en";
+        button.textContent = opened ? (english ? "Close gallery ↑" : "收起作品 ↑") : (english ? (button.dataset.galleryToggle === "poster-gallery" ? "View poster work ↓" : "View shop work ↓") : (button.dataset.galleryToggle === "poster-gallery" ? "展开海报作品 ↓" : "展开微店作品 ↓"));
+      });
+      const galleryState = new WeakMap();
+      const activateGallery = gallery => {
+        if (galleryState.has(gallery)) return;
+        const state = { lastInteraction: 0, dragging: false, startX: 0, startScroll: 0, autoScrolling: false };
+        galleryState.set(gallery, state);
+        const interact = () => { state.lastInteraction = Date.now(); };
+        gallery.addEventListener("pointerdown", event => { state.dragging = true; state.startX = event.clientX; state.startScroll = gallery.scrollLeft; gallery.classList.add("dragging"); gallery.setPointerCapture(event.pointerId); interact(); });
+        gallery.addEventListener("pointermove", event => { if (!state.dragging) return; gallery.scrollLeft = state.startScroll - (event.clientX - state.startX); interact(); });
+        const release = () => { state.dragging = false; gallery.classList.remove("dragging"); interact(); };
+        gallery.addEventListener("pointerup", release); gallery.addEventListener("pointercancel", release);
+        gallery.addEventListener("wheel", interact, { passive:true }); gallery.addEventListener("scroll", () => { if (!state.autoScrolling) interact(); }, { passive:true });
+        const autoScroll = () => {
+          if (gallery.classList.contains("open") && !state.dragging && Date.now() - state.lastInteraction > 1400 && gallery.scrollWidth > gallery.clientWidth) {
+            const atEnd = gallery.scrollLeft >= gallery.scrollWidth - gallery.clientWidth - 1;
+            state.autoScrolling = true;
+            gallery.scrollLeft = atEnd ? 0 : gallery.scrollLeft + 0.45;
+            requestAnimationFrame(() => { state.autoScrolling = false; });
+          }
+          requestAnimationFrame(autoScroll);
+        };
+        requestAnimationFrame(autoScroll);
+      };
+      document.querySelectorAll(".work-gallery").forEach(activateGallery);
+
+      const englishProjects = {
+        cenuw: { no:"01 / WEB", title:"UW Chinese Entrepreneurs Network Website", time:"Jun 2025 — Jun 2026", role:"Director of Design · Brand Communications & Content Operations", work:"Independently built and managed CENUW’s website, covering information architecture, content planning, editorial publishing, and ongoing updates. The site created a clear digital home for events, member stories, and community resources.", result:"Managed the website for over one year; also led visual and promotional assets for 8 major events reaching 500+ UW students and 100+ North American professionals.", link:"https://cenuw.com", label:"Visit website" },
+        channels: { no:"02 / VIDEO", title:"WeChat Channels Content Operations", time:"Project period: to be added", role:"Content Operations · Sailing Camp, Tao at Meisha & Meisha Honors Program", work:"Owned end-to-end content support across three WeChat Channels: topic and script ideation, on-site shooting, editing, cover design, and publishing. Adapted storytelling for sailing, campus life, and youth development content.", result:"Multiple videos received strong engagement. Explore the three accounts and selected work below.", links:[{label:"Tao at Meisha",url:"https://weixin.qq.com/sph/AVBIjMFq2E"},{label:"Sailing Camp",url:"https://weixin.qq.com/sph/AeEGKBB5jw"},{label:"Meisha Honors Program",url:"https://weixin.qq.com/sph/A6Le1heKZJ"}] },
+        sailgp: { no:"03 / GLOBAL SOCIAL", title:"SailGP Event Content", time:"Mar 2025 — Apr 2025", role:"Race Operations Intern · Black Foils New Zealand Team", work:"Supported pre-race preparation, logistics, boat assembly, sea-condition data, and shore/water team supplies; also contributed to short-form event content and the SailGP New Zealand Instagram presence.", result:"Created short-form video content that reached 28,000 views, while gaining hands-on experience in a global sports-event environment.", link:"https://www.instagram.com/reel/DHnTRZ2x7zW/", label:"Watch Instagram Reel" },
+        xiaohongshu: { no:"04 / ONGOING", title:"Who Understands Monolids?", time:"Ongoing", role:"Independent Poster Design Content Creator", work:"Independently manage a Xiaohongshu account dedicated to original poster design and the creative process, handling content direction, visual design, publishing, and daily account management.", result:"Earned 5,000+ likes and saves while building a stable audience for original design work.", link:"https://xhslink.cn/m/7X5AZpXVkMD", label:"Visit my Xiaohongshu profile" }
+      };
+      const englishCopy = {
+        ".brand":"YANG MENG <span>●</span> PORTFOLIO",
+        ".hero h1":"Turning content<br>into <em>human moments.</em>",
+        ".hero-copy":"Hi, I’m <strong>Yang Meng</strong>. I work in content operations and creative production—from concept and shooting through editing and publishing—to help meaningful stories reach more people.",
+        ".hero .buttons a:first-child":"View selected work ↓",
+        "#about .section-title":"About <em>me</em>",
+        "#about .section-note":"B.A. in Communication, University of Washington · GPA 3.90 / 4.00.",
+        ".intro-lead":"I am a content creator focused on <strong>brand communication, content operations, and stories from the field.</strong> With bilingual collaboration experience, I turn project objectives into clear, engaging content across events, sports, and commercial environments.",
+        "#about .file-row:nth-child(1) span:last-child":"University of Washington<br>Bachelor of Arts in Communication · Sep 2024 — Present · GPA 3.90 / 4.00",
+        "#about .file-row:nth-child(2) span:last-child":"Dean’s List<br>Awarded to students whose semester performance ranks in the top 5%, recognizing exceptional academic achievement.",
+        "#about .file-row:nth-child(4) span:last-child":"Proficient in AI-assisted content, design, and web work: ChatGPT · Claude · Gemini · Cursor · GitHub Copilot · VS Code · Replit · v0 · Lovable · Bolt · GitHub · Figma · Vercel · HTML / CSS / JavaScript",
+        "#about .file-row:nth-child(5) span:last-child":"WIX · Xiumi · Microsoft 365",
+        "#about .file-row:nth-child(6) span:last-child":"Chinese / English",
+        "#works .section-title":"Highlights <em>work</em>",
+        "#works .section-note":"Open each project file for role, responsibilities, timing, and outcomes.",
+        ".works .work:nth-child(1) h3":"UW Chinese Entrepreneurs Network<br>Website",
+        ".works .work:nth-child(1) p":"Independently built and maintained CENUW’s site, giving events, members, and content a clear digital home.",
+        ".works .work:nth-child(2) h3":"WeChat Channels<br>Content Operations",
+        ".works .work:nth-child(2) p":"End-to-end planning, filming, editing, and publishing across three accounts.",
+        ".works .work:nth-child(3) h3":"SailGP<br>Event Content",
+        ".works .work:nth-child(3) p":"Supported operations, logistics, and short-form content creation on the ground at an international sailing event.",
+        ".works .work:nth-child(4) h3":"Who Understands Monolids?<br>Xiaohongshu",
+        ".works .work:nth-child(4) p":"An active account documenting original poster design and creative process.",
+        "#experience .section-title":"Past <em>experience</em>",
+        "#experience .section-note":"Content, operations, and coordination experience across community, events, sports, and retail.",
+        "#experience .experience:nth-child(1) div":"<h3><a href=\"https://www.rise2gether.co/\" target=\"_blank\" rel=\"noopener\">Rise2gether ↗</a></h3><p class=\"role\">Events Content & Coordination Intern · Seattle-based nonprofit supporting Asian women’s career development</p><p>Planned and executed 15 professional development events with up to 300 attendees; drafted event proposals, promotional copy, and recaps; coordinated 50+ industry speakers and partners.</p>",
+        "#experience .experience:nth-child(2) div":"<h3><a href=\"https://climatepledgearena.com/\" target=\"_blank\" rel=\"noopener\">Climate Pledge Arena ↗</a></h3><p class=\"role\">Venue Operations Intern</p><p>Supported operations for 60+ professional sports events, concerts, and large-scale entertainment events serving 15,000–18,000 attendees per event; managed inventory, restocking, and equipment for 50+ SKUs.</p>",
+        "#experience .experience:nth-child(3) div":"<h3><a href=\"https://www.instagram.com/sailgpnzl/?hl=en\" target=\"_blank\" rel=\"noopener\">SailGP · Black Foils New Zealand Team ↗</a></h3><p class=\"role\">Race Operations Intern · A global professional sailing league team</p><p>SailGP is a global championship featuring national teams racing high-tech F50 foiling catamarans. Supported pre-race preparation, logistics, boat assembly, and team supply operations; created video content with 28,000 views.</p>",
+        "#experience .experience:nth-child(4) div":"<h3>Vanke · Shenzhen One Mall</h3><p class=\"role\">Commercial Management Intern · <a href=\"https://mp.weixin.qq.com/s/TvAonBSBjQZ6oy7WFLLw4w\" target=\"_blank\" rel=\"noopener\">View WeChat article ↗</a></p><p>Supported the Tipsy Coast pop-up campaign, reaching 10,000+ visitors; planned promotional content and edited WeChat articles that earned 10,000+ views and 300+ likes.</p>",
+        "#experience .experience:nth-child(5) div":"<h3>WeChat Channels Content Operations</h3><p class=\"role\">Sailing Camp · Tao at Meisha · Meisha Honors Program</p><p>Contributed to topic planning, shooting, editing, cover design, and publishing across three accounts. Selected work: <a href=\"https://weixin.qq.com/sph/A30PKySzqt\" target=\"_blank\" rel=\"noopener\">Video ↗</a>.</p>",
+        "#experience .experience:nth-child(6) div":"<h3>Chinese Entrepreneurs Network at UW · CENUW</h3><p class=\"role\">Director of Design · Brand Communications & Content Operations</p><p>Led visual and promotional assets for 8 major events, reaching 500+ UW students and 100+ North American professionals; built and managed the organization’s website for over one year.</p><a class=\"experience-button\" href=\"https://cenuw.com\" target=\"_blank\" rel=\"noopener\">Visit website ↗</a>",
+        "#experience .experience:nth-child(7) div":"<h3>谁懂单眼皮啊</h3><p class=\"role\">Original Poster Design Account · Independent Creator</p><p>Continuously publish original poster design and creative-process content; earned 5,000+ likes and saves while building a stable audience.</p><button class=\"gallery-toggle\" type=\"button\" data-gallery-toggle=\"poster-gallery\">View poster work ↓</button><div id=\"poster-gallery\" class=\"work-gallery\"><img src=\"assets/posters/yan-01.jpg\" alt=\"Original poster design 1\" /><img src=\"assets/posters/silence-01.jpg\" alt=\"Original poster design 2\" /><img src=\"assets/posters/yan-14.jpg\" alt=\"Original poster design 3\" /></div>",
+        "#experience .experience:nth-child(8) div":"<h3>一只羊羊羊</h3><p class=\"role\">Original Product Store · Product Design & Private-domain Operations</p><p>Independently designed, promoted, and sold original products; managed content promotion, customer communication, and orders over two years, building 11,000 store followers and 28,000 social-media followers.</p><button class=\"gallery-toggle\" type=\"button\" data-gallery-toggle=\"shop-gallery\">View shop work ↓</button><div id=\"shop-gallery\" class=\"work-gallery\"><img src=\"assets/shop/justin-ticket.jpg\" alt=\"Original product work 1\" /><img src=\"assets/shop/product-01.jpg\" alt=\"Original product work 2\" /><img src=\"assets/shop/store-01.jpg\" alt=\"Store work 3\" /></div>",
+        ".footer .mono":"LET’S MAKE SOMETHING SEEN.",
+        ".footer h2":"Let’s make<br><em>something meaningful.</em>"
+      };
+      const originalCopy = new Map();
+      let currentLanguage = "zh";
+      const applyLanguage = language => {
+        const isEnglish = language === "en";
+        Object.entries(englishCopy).forEach(([selector, english]) => document.querySelectorAll(selector).forEach((node, index) => {
+          const key = `${selector}-${index}`;
+          if (!originalCopy.has(key)) originalCopy.set(key, node.innerHTML);
+          node.innerHTML = isEnglish ? english : originalCopy.get(key);
+        }));
+        document.querySelectorAll("#experience .experience time").forEach((node, index) => {
+          const englishTimes = ["Jun 2025 — May 2026", "Sep 2024 — Present", "Mar 2025 — Apr 2025", "Jun 2022 — Jul 2022", "CONTENT PROJECT", "Jun 2025 — Jun 2026", "ONGOING", "PAST PROJECT"];
+          if (!node.dataset.zh) node.dataset.zh = node.textContent;
+          node.textContent = isEnglish ? englishTimes[index] : node.dataset.zh;
+        });
+        document.documentElement.lang = isEnglish ? "en" : "zh-CN";
+        document.title = isEnglish ? "Yang Meng | Portfolio" : "孟扬 Yang Meng｜PORTFOLIO";
+        document.querySelector(".hero .buttons a:last-child").href = isEnglish ? "mailto:uwmengyang@gmail.com" : "mailto:meishamengyang@163.com";
+        document.querySelector(".hero .buttons a:last-child").textContent = isEnglish ? "Get in touch" : "联系我";
+        const emailLink = document.querySelector(".contact-links a:first-child");
+        emailLink.href = isEnglish ? "mailto:uwmengyang@gmail.com" : "mailto:meishamengyang@163.com";
+        emailLink.textContent = isEnglish ? "uwmengyang@gmail.com ↗" : "meishamengyang@163.com ↗";
+        currentLanguage = language;
+        document.getElementById("lang-toggle").textContent = isEnglish ? "中文" : "EN";
+        document.querySelectorAll(".work-gallery").forEach(activateGallery);
+      };
+      document.getElementById("lang-toggle").addEventListener("click", () => applyLanguage(currentLanguage === "zh" ? "en" : "zh"));
+    </script>
+  </body>
+</html>
