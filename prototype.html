@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Yang Meng Portfolio｜交互样式原型</title>
+    <style>
+      :root { color-scheme:light; --panel:#f7f4ee; --ink:#17263c; --blue:#0877b7; --pink:#ff8db5; --line:#c9c3ba; }
+      * { box-sizing:border-box; }
+      html,body { height:100%; }
+      body { margin:0; overflow:hidden; color:var(--ink); background:#dcecf5; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+      button,input,select { font:inherit; }
+      .app { display:grid; grid-template-columns:340px minmax(0,1fr); height:100%; }
+      .panel { position:relative; z-index:2; overflow:auto; padding:18px 18px 30px; background:var(--panel); border-right:2px solid var(--ink); box-shadow:7px 0 18px rgba(19,38,60,.14); }
+      .panel-head { position:sticky; top:-18px; z-index:3; margin:-18px -18px 18px; padding:19px 18px 16px; color:#fff; background:var(--ink); border-bottom:5px solid var(--pink); }
+      .panel-head h1 { margin:0 0 5px; font-size:20px; line-height:1.1; }
+      .panel-head p { margin:0; color:#dbe9f4; font-size:12px; line-height:1.45; }
+      .status { display:flex; align-items:center; gap:7px; margin-top:11px; font:700 10px/1 monospace; letter-spacing:.06em; }
+      .status::before { content:""; width:8px; height:8px; border-radius:50%; background:#73e7a1; box-shadow:0 0 0 3px rgba(115,231,161,.18); }
+      fieldset { min-width:0; margin:0 0 15px; padding:13px; border:2px solid var(--ink); background:#fff; box-shadow:3px 4px 0 rgba(23,38,60,.14); }
+      legend { padding:4px 8px; color:#fff; background:var(--blue); border:1px solid var(--ink); font-size:11px; font-weight:800; letter-spacing:.05em; }
+      .control { display:grid; grid-template-columns:1fr auto; gap:6px 10px; align-items:center; margin:0 0 13px; }
+      .control:last-child { margin-bottom:0; }
+      .control label { font-size:12px; font-weight:700; }
+      .value { min-width:54px; padding:2px 5px; text-align:right; color:var(--blue); background:#edf8ff; border:1px solid #b7d9ed; font:700 10px/1.4 monospace; }
+      .control input[type="range"] { grid-column:1/-1; width:100%; accent-color:var(--pink); cursor:pointer; }
+      .control select { grid-column:1/-1; width:100%; padding:8px; color:var(--ink); background:#fffdf6; border:1.5px solid var(--ink); }
+      .color-row { display:grid; grid-template-columns:1fr 42px; gap:10px; align-items:center; margin-bottom:9px; }
+      .color-row:last-child { margin-bottom:0; }
+      .color-row label { font-size:12px; font-weight:700; }
+      .color-row input { width:42px; height:30px; padding:2px; border:1.5px solid var(--ink); background:#fff; cursor:pointer; }
+      .locked { margin-bottom:13px; padding:9px 10px; background:#fff3b6; border:1.5px dashed var(--ink); font-size:11px; line-height:1.45; }
+      .actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+      .actions button,.open-site { min-height:39px; padding:9px 10px; border:2px solid var(--ink); background:#fff; color:var(--ink); font-size:11px; font-weight:800; cursor:pointer; box-shadow:3px 3px 0 var(--ink); }
+      .actions .primary { color:#fff; background:var(--pink); }
+      .actions button:active,.open-site:active { transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink); }
+      .open-site { display:block; margin-top:10px; text-align:center; text-decoration:none; background:#bfe9ff; }
+      .preview { position:relative; min-width:0; padding:18px; background:linear-gradient(135deg,#bfe9ff,#f8dbe6); }
+      .preview::before { content:"LIVE PREVIEW"; position:absolute; z-index:2; top:27px; right:31px; padding:7px 10px; color:#fff; background:var(--ink); border:2px solid #fff; font:700 10px/1 monospace; box-shadow:3px 3px 0 var(--pink); pointer-events:none; }
+      iframe { display:block; width:100%; height:100%; border:3px solid var(--ink); background:#fff; box-shadow:9px 10px 0 rgba(23,38,60,.26); }
+      .toast { position:fixed; z-index:10; left:360px; bottom:28px; padding:11px 15px; color:#fff; background:var(--ink); border:2px solid #fff; box-shadow:4px 5px 0 var(--pink); font-size:12px; opacity:0; transform:translateY(15px); pointer-events:none; transition:.25s; }
+      .toast.show { opacity:1; transform:none; }
+      @media (max-width:800px) { body { overflow:auto; }.app { display:block; height:auto; }.panel { max-height:47vh; border-right:0; border-bottom:2px solid var(--ink); }.preview { height:53vh; padding:10px; }.preview::before { top:17px; right:20px; }.toast { left:18px; bottom:18px; } }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <aside class="panel" aria-label="网页样式参数面板">
+        <div class="panel-head"><h1>STYLE LAB / 样式实验室</h1><p>所有调整只作用于右侧预览。满意后复制 CSS 参数即可。</p><div class="status">REAL-TIME CONTROL</div></div>
+        <div class="locked"><strong>标题字体已锁定</strong><br />保持 Noto Sans SC / 原网站标题风格。正文默认使用 SimSong（宋体）。</div>
+
+        <fieldset><legend>TYPOGRAPHY / 字体</legend>
+          <div class="control"><label for="bodyFont">正文字体</label><select id="bodyFont" data-kind="font"><option value='"SimSong","宋体",serif'>SimSong / 宋体</option><option value='"Noto Sans SC",sans-serif'>Noto Sans SC</option><option value='Georgia,serif'>Georgia</option><option value='Arial,sans-serif'>Arial</option><option value='"Courier New",monospace'>Courier New</option></select></div>
+          <div class="control"><label for="bodySize">正文字号</label><output class="value" for="bodySize"></output><input id="bodySize" type="range" min="11" max="22" step="1" value="13" data-unit="px" /></div>
+          <div class="control"><label for="lineHeight">正文行距</label><output class="value" for="lineHeight"></output><input id="lineHeight" type="range" min="1.3" max="2.4" step="0.05" value="1.8" /></div>
+          <div class="control"><label for="letterSpacing">字间距</label><output class="value" for="letterSpacing"></output><input id="letterSpacing" type="range" min="-0.5" max="2" step="0.1" value="0" data-unit="px" /></div>
+          <div class="control"><label for="heroTitle">首屏标题字号</label><output class="value" for="heroTitle"></output><input id="heroTitle" type="range" min="48" max="112" step="2" value="84" data-unit="px" /></div>
+          <div class="control"><label for="sectionTitle">栏目标题字号</label><output class="value" for="sectionTitle"></output><input id="sectionTitle" type="range" min="34" max="78" step="2" value="58" data-unit="px" /></div>
+          <div class="control"><label for="cardTitle">项目标题字号</label><output class="value" for="cardTitle"></output><input id="cardTitle" type="range" min="24" max="58" step="2" value="46" data-unit="px" /></div>
+        </fieldset>
+
+        <fieldset><legend>LAYOUT / 排版</legend>
+          <div class="control"><label for="contentWidth">内容最大宽度</label><output class="value" for="contentWidth"></output><input id="contentWidth" type="range" min="820" max="1440" step="20" value="1180" data-unit="px" /></div>
+          <div class="control"><label for="sectionMargin">栏目上下间距</label><output class="value" for="sectionMargin"></output><input id="sectionMargin" type="range" min="24" max="110" step="2" value="64" data-unit="px" /></div>
+          <div class="control"><label for="sectionPadding">栏目内边距</label><output class="value" for="sectionPadding"></output><input id="sectionPadding" type="range" min="24" max="110" step="2" value="60" data-unit="px" /></div>
+          <div class="control"><label for="gridGap">卡片间距</label><output class="value" for="gridGap"></output><input id="gridGap" type="range" min="6" max="50" step="2" value="30" data-unit="px" /></div>
+          <div class="control"><label for="cardPadding">卡片内边距</label><output class="value" for="cardPadding"></output><input id="cardPadding" type="range" min="14" max="55" step="1" value="31" data-unit="px" /></div>
+          <div class="control"><label for="workHeight">Highlights 卡片高度</label><output class="value" for="workHeight"></output><input id="workHeight" type="range" min="260" max="520" step="10" value="370" data-unit="px" /></div>
+          <div class="control"><label for="galleryHeight">作品图片高度</label><output class="value" for="galleryHeight"></output><input id="galleryHeight" type="range" min="160" max="420" step="10" value="260" data-unit="px" /></div>
+        </fieldset>
+
+        <fieldset><legend>MATERIAL / 材质</legend>
+          <div class="control"><label for="borderWidth">描边厚度</label><output class="value" for="borderWidth"></output><input id="borderWidth" type="range" min="1" max="7" step="0.5" value="3" data-unit="px" /></div>
+          <div class="control"><label for="shadowX">阴影横向距离</label><output class="value" for="shadowX"></output><input id="shadowX" type="range" min="0" max="24" step="1" value="12" data-unit="px" /></div>
+          <div class="control"><label for="shadowY">阴影纵向距离</label><output class="value" for="shadowY"></output><input id="shadowY" type="range" min="0" max="28" step="1" value="14" data-unit="px" /></div>
+          <div class="control"><label for="paperRotation">纸张倾斜</label><output class="value" for="paperRotation"></output><input id="paperRotation" type="range" min="-2" max="2" step="0.1" value="0.2" data-unit="deg" /></div>
+          <div class="control"><label for="cornerRadius">卡片圆角</label><output class="value" for="cornerRadius"></output><input id="cornerRadius" type="range" min="0" max="30" step="1" value="0" data-unit="px" /></div>
+          <div class="control"><label for="textureOpacity">纸张纹理强度</label><output class="value" for="textureOpacity"></output><input id="textureOpacity" type="range" min="0" max="0.18" step="0.01" value="0.06" /></div>
+        </fieldset>
+
+        <fieldset><legend>COLOR / 配色</legend>
+          <div class="color-row"><label for="lockerColor">Locker 蓝</label><input id="lockerColor" type="color" value="#0877b7" /></div>
+          <div class="color-row"><label for="pinkColor">泡泡粉</label><input id="pinkColor" type="color" value="#ff8db5" /></div>
+          <div class="color-row"><label for="skyColor">天空蓝</label><input id="skyColor" type="color" value="#bfe9ff" /></div>
+          <div class="color-row"><label for="yellowColor">便利贴黄</label><input id="yellowColor" type="color" value="#ffe56d" /></div>
+          <div class="color-row"><label for="paperColor">纸张颜色</label><input id="paperColor" type="color" value="#fffdf6" /></div>
+          <div class="color-row"><label for="inkColor">文字颜色</label><input id="inkColor" type="color" value="#18263d" /></div>
+        </fieldset>
+
+        <fieldset><legend>MOTION / 动画</legend>
+          <div class="control"><label for="pasteSpeed">贴纸入场速度</label><output class="value" for="pasteSpeed"></output><input id="pasteSpeed" type="range" min="0.15" max="2.5" step="0.05" value="0.72" data-unit="s" /></div>
+          <div class="control"><label for="floatSpeed">漂浮周期</label><output class="value" for="floatSpeed"></output><input id="floatSpeed" type="range" min="2" max="14" step="0.5" value="6" data-unit="s" /></div>
+          <div class="control"><label for="decorScale">装饰整体大小</label><output class="value" for="decorScale"></output><input id="decorScale" type="range" min="0.65" max="1.35" step="0.05" value="1" /></div>
+          <div class="control"><label for="hoverLift">悬停抬升距离</label><output class="value" for="hoverLift"></output><input id="hoverLift" type="range" min="0" max="14" step="1" value="4" data-unit="px" /></div>
+        </fieldset>
+
+        <div class="actions"><button id="reset" type="button">重置参数</button><button id="copy" class="primary" type="button">复制 CSS</button></div>
+        <a class="open-site" href="index.html" target="_blank" rel="noopener">在新窗口打开网站 ↗</a>
+      </aside>
+      <section class="preview" aria-label="网页实时预览"><iframe id="sitePreview" src="index.html" title="Yang Meng Portfolio 实时预览"></iframe></section>
+    </main>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script>
+      const frame = document.getElementById("sitePreview");
+      const toast = document.getElementById("toast");
+      const inputs = [...document.querySelectorAll("input,select")];
+      const defaults = Object.fromEntries(inputs.map(input => [input.id,input.value]));
+      const units = input => input.dataset.unit || "";
+      const valueOf = id => document.getElementById(id).value;
+      const setOutput = input => { const output = document.querySelector(`output[for="${input.id}"]`); if (output) output.textContent = `${input.value}${units(input)}`; };
+      const showToast = message => { toast.textContent = message; toast.classList.add("show"); clearTimeout(showToast.timer); showToast.timer = setTimeout(() => toast.classList.remove("show"),1800); };
+      const cssText = () => `
+:root {
+  --ink: ${valueOf("inkColor")};
+  --paper: ${valueOf("paperColor")};
+  --locker: ${valueOf("lockerColor")};
+  --green: ${valueOf("lockerColor")};
+  --pink: ${valueOf("pinkColor")};
+  --sky: ${valueOf("skyColor")};
+  --yellow: ${valueOf("yellowColor")};
+}
+body { font-family:${valueOf("bodyFont")}; font-size:${valueOf("bodySize")}px; letter-spacing:${valueOf("letterSpacing")}px; }
+p,.file-row,.experience p,.modal-body { line-height:${valueOf("lineHeight")}; }
+.shell,.section,.nav { width:min(${valueOf("contentWidth")}px,calc(100% - 48px)); }
+.hero h1 { font-size:${valueOf("heroTitle")}px; }
+.section-title { font-size:${valueOf("sectionTitle")}px; }
+.work h3 { font-size:${valueOf("cardTitle")}px; }
+.section { margin:${valueOf("sectionMargin")}px auto; padding:${valueOf("sectionPadding")}px; border-width:${valueOf("borderWidth")}px; border-radius:${valueOf("cornerRadius")}px; box-shadow:${valueOf("shadowX")}px ${valueOf("shadowY")}px 0 rgba(4,45,73,.46); transform:rotate(${valueOf("paperRotation")}deg); background-image:linear-gradient(rgba(24,38,61,${valueOf("textureOpacity")}) 1px,transparent 1px),linear-gradient(90deg,rgba(24,38,61,${valueOf("textureOpacity")}) 1px,transparent 1px); background-size:23px 23px; }
+.works,.experience-list { gap:${valueOf("gridGap")}px; }
+.work,.experience { padding:${valueOf("cardPadding")}px; border-width:${valueOf("borderWidth")}px; border-radius:${valueOf("cornerRadius")}px; }
+.work { min-height:${valueOf("workHeight")}px; }
+.gallery-slide { height:${valueOf("galleryHeight")}px; }
+.media { animation-duration:${valueOf("pasteSpeed")}s,${valueOf("floatSpeed")}s; }
+.scrap-decor { transform:scale(${valueOf("decorScale")}); transform-origin:center; }
+.work:hover,.button:hover { translate:0 -${valueOf("hoverLift")}px; }
+`;
+      const apply = () => {
+        inputs.forEach(setOutput);
+        const doc = frame.contentDocument;
+        if (!doc) return;
+        let style = doc.getElementById("prototype-overrides");
+        if (!style) { style = doc.createElement("style"); style.id = "prototype-overrides"; doc.head.append(style); }
+        style.textContent = cssText();
+      };
+      inputs.forEach(input => input.addEventListener("input",apply));
+      frame.addEventListener("load",apply);
+      document.getElementById("reset").addEventListener("click",() => { inputs.forEach(input => input.value = defaults[input.id]); apply(); showToast("已恢复默认参数"); });
+      document.getElementById("copy").addEventListener("click",async () => { try { await navigator.clipboard.writeText(cssText().trim()); showToast("CSS 参数已复制"); } catch { showToast("复制失败，请允许剪贴板权限"); } });
+      inputs.forEach(setOutput);
+    </script>
+  </body>
+</html>
