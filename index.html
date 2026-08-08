@@ -229,15 +229,53 @@
       @media (max-width:900px) { .hero { padding:58px 34px 48px; grid-template-columns:1fr; }.hero-stage { min-height:1120px; }.folder-wrap { min-height:390px; }.media-guitar { font-size:58px; }.section { padding:64px 34px; }.intro-grid { gap:36px; } }
       @media (max-width:760px) { .nav { width:min(100% - 26px,1180px); }.hero-stage { min-height:1050px; padding:25px 0 55px; }.hero { width:min(100% - 24px,1180px); padding:48px 18px 38px; gap:35px; }.hero-copy-card { padding:29px 20px 31px; }.folder-wrap { min-height:345px; }.folder { width:92%; height:280px; padding:30px 24px; }.folder::before { width:134px; }.folder h2 { margin-top:48px; font-size:41px; }.media-star { left:-2%; top:5%; width:49px; height:49px; }.media-heart { right:-2%; top:8%; width:54px; height:51px; font-size:32px; }.media-bubble { left:1%; bottom:16%; font-size:13px; padding:9px 11px; }.media-arrow { right:0; bottom:13%; font-size:40px; }.media-button { right:3%; top:57%; width:42px; height:42px; }.media-label { left:5%; bottom:3%; }.media-guitar { right:1%; bottom:0; font-size:49px; }.media-spark { left:43%; top:1%; font-size:39px; }.section { width:min(100% - 24px,1180px); margin:40px auto; padding:55px 20px; }.section-head { padding-bottom:18px; }.section-note { max-width:100%; }.file-list { padding:13px 15px; }.file-row { grid-template-columns:67px 1fr; gap:10px; }.works { gap:25px; }.work { min-height:330px; padding:25px; }.experience { padding:24px 20px; }.footer { margin-top:40px; } }
       @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; }.media { opacity:1; animation:none; transform:rotate(var(--rotation)); }.work,.button,.experience-button,.gallery-toggle { transition:none; } }
+
+      /* Studio refinement: one expressive hero, quieter editorial archive below */
+      .scroll-progress { position:fixed; z-index:50; inset:0 auto auto 0; width:0; height:4px; background:linear-gradient(90deg,var(--yellow),var(--pink),var(--sky)); box-shadow:0 1px 0 rgba(24,38,61,.35); pointer-events:none; }
+      .nav { position:sticky; top:0; z-index:40; padding-inline:12px; background:rgba(8,91,142,.88); border:1px solid rgba(255,255,255,.36); border-top:0; backdrop-filter:blur(12px) saturate(1.15); }
+      .hero-copy-card { padding-bottom:30px; }
+      .hero-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; margin-top:28px; padding-top:18px; border-top:2px dashed rgba(24,38,61,.4); }
+      .hero-fact { min-width:0; padding:9px 8px 8px; background:#fff8d2; border:1.5px solid var(--ink); box-shadow:2px 3px 0 var(--ink); transform:rotate(-.5deg); }
+      .hero-fact:nth-child(2) { background:#e5f5ff; transform:rotate(.7deg); }
+      .hero-fact:nth-child(3) { background:#ffe5ee; transform:rotate(-.3deg); }
+      .hero-fact small { display:block; margin-bottom:4px; color:var(--locker); font:700 9px/1.2 "Space Mono",monospace; letter-spacing:.07em; }
+      .hero-fact strong { display:block; overflow-wrap:anywhere; font:800 11px/1.35 "Noto Sans SC",system-ui,sans-serif; }
+      .folder-stamp { position:absolute; z-index:2; right:29px; bottom:28px; padding:6px 9px; color:#fff; background:var(--locker); border:2px solid var(--ink); font:700 9px/1 "Space Mono",monospace; letter-spacing:.06em; transform:rotate(-5deg); box-shadow:2px 3px 0 rgba(24,38,61,.35); }
+      .section { transform:none !important; border-width:2px; box-shadow:8px 10px 0 rgba(4,45,73,.38); }
+      .section::before { width:88px; height:24px; left:clamp(26px,7%,80px); top:-13px; }
+      .section::after { display:none; }
+      .section-head { margin-bottom:38px; }
+      .section-title::before { height:18px; bottom:0; opacity:.78; }
+      .section-note { box-shadow:3px 4px 0 var(--ink); transform:rotate(1deg); }
+      .intro-lead,.file-list { transform:none; box-shadow:5px 6px 0 var(--ink); }
+      .works { gap:24px; }
+      .work,.work:nth-child(2) { transform:none; border-width:2px; box-shadow:6px 7px 0 var(--ink); }
+      .work:hover,.work:nth-child(2):hover { transform:translate(-3px,-4px); box-shadow:10px 11px 0 var(--pink); }
+      .work:focus-visible,.button:focus-visible,.experience-button:focus-visible,.gallery-toggle:focus-visible,.lang-toggle:focus-visible { outline:4px solid var(--yellow); outline-offset:4px; }
+      .work-no { display:inline-flex; align-items:center; width:max-content; padding:5px 8px; color:#fff; background:var(--locker); border:1.5px solid var(--ink); box-shadow:2px 2px 0 var(--ink); }
+      .experience-list { gap:14px; }
+      .experience,.experience:nth-child(3n+1),.experience:nth-child(3n+2),.experience:nth-child(3n) { transform:none; background:#fff; border-width:1.5px; box-shadow:3px 4px 0 rgba(24,38,61,.16); }
+      .experience:nth-child(3n+1) { border-left:7px solid var(--yellow); }
+      .experience:nth-child(3n+2) { border-left:7px solid var(--sky); }
+      .experience:nth-child(3n) { border-left:7px solid var(--pink); }
+      .experience::after { content:""; width:10px; height:10px; right:18px; top:17px; border-radius:50%; background:var(--paper); border:1.5px solid var(--ink); box-shadow:inset 1px 1px 2px rgba(24,38,61,.18); }
+      .experience time { align-self:start; width:max-content; padding:6px 8px; color:var(--ink); background:#edf8ff; border:1px solid var(--ink); font-size:10px; }
+      .experience h3 { padding-right:28px; }
+      .experience-button,.gallery-toggle { transition:transform .2s,box-shadow .2s,background .2s; }
+      .experience-button:hover,.gallery-toggle:hover { transform:translateY(-2px); box-shadow:4px 6px 0 var(--ink); }
+      .contact-links a { transition:color .2s,transform .2s; }
+      .contact-links a:hover { color:var(--yellow); transform:translateX(4px); }
+      @media (max-width:760px) { .nav { padding-inline:8px; }.hero-facts { grid-template-columns:1fr 1fr; }.hero-fact:last-child { grid-column:1/-1; }.folder-stamp { right:21px; bottom:23px; }.section-head { margin-bottom:30px; }.experience { padding-left:17px; } }
     </style>
   </head>
   <body>
-    <header class="shell nav"><a class="brand" href="#top">孟扬 <span>●</span> PORTFOLIO</a><nav class="nav-links"><a href="#about">ABOUT</a><a href="#works">WORKS</a><a href="#experience">EXPERIENCE</a><a href="#contact">CONTACT</a><button id="lang-toggle" class="lang-toggle" type="button">EN</button></nav></header>
+    <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
+    <header class="shell nav"><a class="brand" href="#top">孟扬 <span>●</span> PORTFOLIO</a><nav class="nav-links" aria-label="Portfolio navigation"><a href="#about">ABOUT</a><a href="#works">WORKS</a><a href="#experience">EXPERIENCE</a><a href="#contact">CONTACT</a><button id="lang-toggle" class="lang-toggle" type="button">EN</button></nav></header>
     <main id="top">
       <div class="hero-stage">
         <section class="shell hero">
-          <div class="hero-copy-card"><div class="eyebrow">YANG MENG / CONTENT OPERATION &amp; CREATIVE MAKING</div><h1>把内容做成<br>有温度的<br><em>现场。</em></h1><p class="hero-copy">你好，我是<strong>孟扬 Yang Meng</strong>。我做内容运营，也做内容本身——从选题、拍摄到剪辑和发布，让值得被看见的故事抵达更多人。</p><div class="buttons"><a class="button primary" href="#works">查看作品集 ↓</a><a class="button" href="mailto:meishamengyang@163.com">联系我</a></div></div>
-          <div class="folder-wrap"><span class="star">✦</span><span class="tape"></span><div class="folder"><div class="folder-top"><span class="folder-label">PERSONAL ARCHIVE</span><span class="mono">NO. 2026</span></div><h2>CONTENT<br><i>PORTFOLIO</i></h2><div class="folder-footer"><span>CREATIVE / SOCIAL / VIDEO</span><span>01 — 04</span></div></div></div>
+          <div class="hero-copy-card"><div class="eyebrow">YANG MENG / CONTENT OPERATION &amp; CREATIVE MAKING</div><h1>把内容做成<br>有温度的<br><em>现场。</em></h1><p class="hero-copy">你好，我是<strong>孟扬 Yang Meng</strong>。我做内容运营，也做内容本身——从选题、拍摄到剪辑和发布，让值得被看见的故事抵达更多人。</p><div class="buttons"><a class="button primary" href="#works">查看作品集 ↓</a><a class="button" href="mailto:meishamengyang@163.com">联系我</a></div><div class="hero-facts" aria-label="Quick facts"><div class="hero-fact"><small>EDUCATION</small><strong>UW COMMUNICATION</strong></div><div class="hero-fact"><small>ACADEMIC</small><strong>GPA 3.90 / 4.00</strong></div><div class="hero-fact"><small>LANGUAGE</small><strong>CHINESE + ENGLISH</strong></div></div></div>
+          <div class="folder-wrap"><span class="star">✦</span><span class="tape"></span><div class="folder"><div class="folder-top"><span class="folder-label">PERSONAL ARCHIVE</span><span class="mono">NO. 2026</span></div><h2>CONTENT<br><i>PORTFOLIO</i></h2><div class="folder-footer"><span>CREATIVE / SOCIAL / VIDEO</span><span>01 — 04</span></div><span class="folder-stamp">FIELD NOTES</span></div></div>
         </section>
         <div class="scrap-decor" aria-hidden="true">
           <span class="media media-star">★</span>
@@ -252,8 +290,8 @@
       </div>
       <section id="about" class="shell section"><div class="section-head"><h2 class="section-title">关于 <em>me</em></h2><p class="section-note">华盛顿大学传播学本科生，GPA 3.90 / 4.00。</p></div><div class="intro-grid"><div><p class="intro-lead">我是一名关注<strong>品牌传播、内容运营与现场叙事</strong>的内容创作者。拥有中英文内容协作经验，能在活动、体育赛事与商业体等不同场景中，把项目目标转成清晰、有传播力的内容。</p><div class="intro-notes"><span class="tag">CONTENT OPERATION</span><span class="tag">CREATIVE PLANNING</span><span class="tag">VIDEO MAKING</span><span class="tag">SOCIAL MEDIA</span></div></div><div class="file-list"><div class="file-row"><span class="mono">EDU</span><span>University of Washington<br>传播学本科｜2024.09 — 至今｜GPA 3.90 / 4.00</span></div><div class="file-row"><span class="mono">HONOR</span><span>Dean’s List（院长荣誉名单）<br>授予学期表现位列前 5% 的学生，是对卓越学术成绩的校级认可。</span></div><div class="file-row"><span class="mono">TOOLS</span><span>Adobe Illustrator · Photoshop · Canva · CapCut · iMovie · SketchUp</span></div><div class="file-row"><span class="mono">AI / VIBE</span><span>熟练使用 AI 辅助内容、设计与网站工作：ChatGPT · Claude · Gemini · GitHub Copilot · VS Code · Lovable · Bolt · GitHub · Figma · JavaScript</span></div><div class="file-row"><span class="mono">WEB</span><span>WIX · Xiumi（秀米）· Microsoft 365</span></div><div class="file-row"><span class="mono">LANG</span><span>中文 / English</span></div></div></div></section>
       <section id="works" class="shell section"><div class="section-head"><h2 class="section-title">精选 <em>highlights</em></h2><p class="section-note">点击档案袋，查看角色、工作内容、项目时间与成果。</p></div><div class="works">
-        <button class="work" type="button" data-project="cenuw"><span class="work-no">01 / WEB</span><span class="clip"></span><div><h3>华盛顿大学商社<br>官方网站</h3><p>独立搭建并维护 CENUW 网站，让活动、成员与内容有清晰的线上归档。</p><span class="open-label">OPEN THE FILE ↗</span></div><div class="tag-row"><span class="tag">INDEPENDENT</span><span class="tag">WEB BUILD</span></div></button>
-        <button class="work" type="button" data-project="sailgp"><span class="work-no">02 / GLOBAL SOCIAL</span><span class="clip"></span><div><h3>SailGP<br>赛事内容</h3><p>在国际帆船赛事现场参与运营、后勤与短视频内容制作。</p><span class="open-label">OPEN THE FILE ↗</span></div><div class="tag-row"><span class="tag">SAILGP NZL</span><span class="tag">INSTAGRAM</span></div></button>
+        <button class="work" type="button" data-project="cenuw"><span class="work-no">CASE FILE / WEB</span><span class="clip"></span><div><h3>华盛顿大学商社<br>官方网站</h3><p>独立搭建并维护 CENUW 网站，让活动、成员与内容有清晰的线上归档。</p><span class="open-label">OPEN THE FILE ↗</span></div><div class="tag-row"><span class="tag">INDEPENDENT</span><span class="tag">WEB BUILD</span></div></button>
+        <button class="work" type="button" data-project="sailgp"><span class="work-no">FIELD REPORT / SAILGP</span><span class="clip"></span><div><h3>SailGP<br>赛事内容</h3><p>在国际帆船赛事现场参与运营、后勤与短视频内容制作。</p><span class="open-label">OPEN THE FILE ↗</span></div><div class="tag-row"><span class="tag">SAILGP NZL</span><span class="tag">INSTAGRAM</span></div></button>
       </div></section>
       <section id="experience" class="shell section"><div class="section-head"><h2 class="section-title">过往 <em>experience</em></h2><p class="section-note">在内容、赛事与大型活动的现场，持续积累执行、协调与传播经验。</p></div><div class="experience-list">
         <article class="experience"><time>2025.06 — 2026.05</time><div><h3>Rise2gether</h3><p class="role">活动内容与协调实习生｜亚裔女性职业发展非营利组织</p><p>参与 15 场职业发展活动的策划与执行，单场规模最高 300 人；撰写活动提案、宣传文案及回顾内容，并协调 50+ 位行业嘉宾与合作伙伴。</p><a class="experience-button" href="https://www.rise2gether.co/" target="_blank" rel="noopener">查看机构网站 ↗</a></div></article>
@@ -273,9 +311,9 @@
     <footer id="contact" class="footer"><div class="shell contact"><div><div class="mono">LET’S MAKE SOMETHING SEEN.</div><h2>想一起做点<br><em>有意思的内容？</em></h2></div><div class="contact-links"><a href="mailto:meishamengyang@163.com">meishamengyang@163.com ↗</a><a href="tel:+12066888209">+1 206 688 8209</a><a href="tel:+8615915316811">+86 159 1531 6811</a><a href="https://www.linkedin.com/in/yang-alice-meng-457189335/" target="_blank" rel="noopener">LinkedIn ↗</a></div></div></footer>
     <script>
       const projects = {
-        cenuw: { no:"01 / WEB", title:"大学社团官方网站", time:"2025.06 — 2026.06", role:"CENUW 设计部部长｜品牌传播与内容运营", work:"独立搭建并持续运营社团官方网站，负责网站的信息架构、内容规划、编辑发布与更新维护；让活动信息、成员故事与社团资源有统一、清晰的线上入口。", result:"网站持续运营一年以上；同时支持 8 场大型活动的视觉与传播物料，覆盖 500+ 华大学生及 100+ 北美专业人士。", link:"https://cenuw.com", label:"访问网站" },
+        cenuw: { no:"CASE FILE / WEB", title:"大学社团官方网站", time:"2025.06 — 2026.06", role:"CENUW 设计部部长｜品牌传播与内容运营", work:"独立搭建并持续运营社团官方网站，负责网站的信息架构、内容规划、编辑发布与更新维护；让活动信息、成员故事与社团资源有统一、清晰的线上入口。", result:"网站持续运营一年以上；同时支持 8 场大型活动的视觉与传播物料，覆盖 500+ 华大学生及 100+ 北美专业人士。", link:"https://cenuw.com", label:"访问网站" },
         channels: { no:"02 / VIDEO", title:"微信视频号内容运营", time:"项目周期：待补充", role:"内容运营｜万航帆艇营地说、陶校在梅沙、梅沙荣誉项目", work:"参与三个微信视频号的全流程内容工作：选题与脚本构思、现场拍摄、剪辑包装、封面与发布。针对帆船运动、校园生活与成长项目等不同主题，完成平台化表达。", result:"账号中多个视频获得较高点赞；可通过下方链接查看三个账号及代表作品。", links:[{label:"陶校在梅沙",url:"https://weixin.qq.com/sph/AVBIjMFq2E"},{label:"万航帆艇营地说",url:"https://weixin.qq.com/sph/AeEGKBB5jw"},{label:"梅沙荣誉项目",url:"https://weixin.qq.com/sph/A6Le1heKZJ"}] },
-        sailgp: { no:"03 / GLOBAL SOCIAL", title:"SailGP 赛事内容", time:"2025.03 — 2025.04", role:"Black Foils 新西兰队赛事运营实习生", work:"参与赛前筹备、后勤与船队协调，支持赛船组装、海情数据及岸上/水上团队物资供应；并参与赛事现场短视频内容制作及 SailGP 新西兰站官方 Instagram 内容运营。", result:"制作短视频单条获得 28,000 播放量；在国际体育赛事现场积累赛事运营与全球社媒内容协作经验。", link:"https://www.instagram.com/reel/DHnTRZ2x7zW/", label:"查看 Instagram Reel" },
+        sailgp: { no:"FIELD REPORT / SAILGP", title:"SailGP 赛事内容", time:"2025.03 — 2025.04", role:"Black Foils 新西兰队赛事运营实习生", work:"参与赛前筹备、后勤与船队协调，支持赛船组装、海情数据及岸上/水上团队物资供应；并参与赛事现场短视频内容制作及 SailGP 新西兰站官方 Instagram 内容运营。", result:"制作短视频单条获得 28,000 播放量；在国际体育赛事现场积累赛事运营与全球社媒内容协作经验。", link:"https://www.instagram.com/reel/DHnTRZ2x7zW/", label:"查看 Instagram Reel" },
         xiaohongshu: { no:"04 / ONGOING", title:"谁懂单眼皮啊", time:"持续运营中", role:"小红书原创海报设计账号｜独立内容创作者", work:"独立运营小红书账号，持续发布原创海报设计及创作过程内容；负责选题、视觉设计、内容发布与账号日常维护，将个人设计表达沉淀为持续更新的内容系列。", result:"累计获得 5,000+ 点赞与收藏，并建立稳定受众与粉丝群体。", link:"https://xhslink.cn/m/7X5AZpXVkMD", label:"查看我的账号主页" }
       };
       const modal = document.getElementById("project-modal");
@@ -422,9 +460,9 @@
       document.querySelectorAll(".work-gallery").forEach(activateGallery);
 
       const englishProjects = {
-        cenuw: { no:"01 / WEB", title:"UW Chinese Entrepreneurs Network Website", time:"Jun 2025 — Jun 2026", role:"Director of Design · Brand Communications & Content Operations", work:"Independently built and managed CENUW’s website, covering information architecture, content planning, editorial publishing, and ongoing updates. The site created a clear digital home for events, member stories, and community resources.", result:"Managed the website for over one year; also led visual and promotional assets for 8 major events reaching 500+ UW students and 100+ North American professionals.", link:"https://cenuw.com", label:"Visit website" },
+        cenuw: { no:"CASE FILE / WEB", title:"UW Chinese Entrepreneurs Network Website", time:"Jun 2025 — Jun 2026", role:"Director of Design · Brand Communications & Content Operations", work:"Independently built and managed CENUW’s website, covering information architecture, content planning, editorial publishing, and ongoing updates. The site created a clear digital home for events, member stories, and community resources.", result:"Managed the website for over one year; also led visual and promotional assets for 8 major events reaching 500+ UW students and 100+ North American professionals.", link:"https://cenuw.com", label:"Visit website" },
         channels: { no:"02 / VIDEO", title:"WeChat Channels Content Operations", time:"Project period: to be added", role:"Content Operations · Sailing Camp, Tao at Meisha & Meisha Honors Program", work:"Owned end-to-end content support across three WeChat Channels: topic and script ideation, on-site shooting, editing, cover design, and publishing. Adapted storytelling for sailing, campus life, and youth development content.", result:"Multiple videos received strong engagement. Explore the three accounts and selected work below.", links:[{label:"Tao at Meisha",url:"https://weixin.qq.com/sph/AVBIjMFq2E"},{label:"Sailing Camp",url:"https://weixin.qq.com/sph/AeEGKBB5jw"},{label:"Meisha Honors Program",url:"https://weixin.qq.com/sph/A6Le1heKZJ"}] },
-        sailgp: { no:"03 / GLOBAL SOCIAL", title:"SailGP Event Content", time:"Mar 2025 — Apr 2025", role:"Race Operations Intern · Black Foils New Zealand Team", work:"Supported pre-race preparation, logistics, boat assembly, sea-condition data, and shore/water team supplies; also contributed to short-form event content and the SailGP New Zealand Instagram presence.", result:"Created short-form video content that reached 28,000 views, while gaining hands-on experience in a global sports-event environment.", link:"https://www.instagram.com/reel/DHnTRZ2x7zW/", label:"Watch Instagram Reel" },
+        sailgp: { no:"FIELD REPORT / SAILGP", title:"SailGP Event Content", time:"Mar 2025 — Apr 2025", role:"Race Operations Intern · Black Foils New Zealand Team", work:"Supported pre-race preparation, logistics, boat assembly, sea-condition data, and shore/water team supplies; also contributed to short-form event content and the SailGP New Zealand Instagram presence.", result:"Created short-form video content that reached 28,000 views, while gaining hands-on experience in a global sports-event environment.", link:"https://www.instagram.com/reel/DHnTRZ2x7zW/", label:"Watch Instagram Reel" },
         xiaohongshu: { no:"04 / ONGOING", title:"Who Understands Monolids?", time:"Ongoing", role:"Independent Poster Design Content Creator", work:"Independently manage a Xiaohongshu account dedicated to original poster design and the creative process, handling content direction, visual design, publishing, and daily account management.", result:"Earned 5,000+ likes and saves while building a stable audience for original design work.", link:"https://xhslink.cn/m/7X5AZpXVkMD", label:"Visit my Xiaohongshu profile" }
       };
       const englishCopy = {
@@ -490,7 +528,15 @@
         document.querySelectorAll(".work-gallery").forEach(activateGallery);
       };
       document.getElementById("lang-toggle").addEventListener("click", () => applyLanguage(currentLanguage === "zh" ? "en" : "zh"));
+      const progress = document.getElementById("scroll-progress");
+      const updateProgress = () => {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        progress.style.width = `${scrollable > 0 ? Math.min(100,(window.scrollY / scrollable) * 100) : 0}%`;
+      };
+      window.addEventListener("scroll",updateProgress,{ passive:true });
+      window.addEventListener("resize",updateProgress,{ passive:true });
       applyLanguage("en");
+      updateProgress();
     </script>
   </body>
 </html>
